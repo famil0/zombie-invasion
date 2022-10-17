@@ -66,25 +66,28 @@ function keyPress(e) {
         root.style.setProperty("--heading", "0deg");
         heading.x = 0;
         heading.y = -1;
+        flashlight(); 
     }
     else if (e.key == 'k') {
         root.style.setProperty("--heading", "180deg");
         heading.x = 0;
         heading.y = 1;
+        flashlight(); 
     }
     else if (e.key == 'l') {
         root.style.setProperty("--heading", "90deg");
         heading.x = 1;
         heading.y = 0;
+        flashlight(); 
     }
     else if (e.key == 'j') {
         root.style.setProperty("--heading", "270deg");
         heading.x = -1;
         heading.y = 0;
+        flashlight(); 
     }
 
     if (e.key == " ") {        
-        removeFlashlights();
         flashlightIsOn = !flashlightIsOn;
         flashlight();        
     }
@@ -102,21 +105,60 @@ function move(dir) {
     map[playerLocation.x + dir.x][playerLocation.y + dir.y].classList.toggle("player");
     playerLocation.x = playerLocation.x + dir.x;
     playerLocation.y = playerLocation.y + dir.y;
-    removeFlashlights();
     flashlight();
 }
 
 function flashlight() {
+    removeFlashlights();
+    let n = 10;
     if (flashlightIsOn) {
-        for (let i = 0; i < 10; i++) {
-            for (let j = 0; j < i * 2 + 1; j++) {
-                try {
-                    let p = map[playerLocation.x + j - i][playerLocation.y - i - 1];
-                    p.classList.add("flashlight");
-                    flashlightPlaces.push(p);
+        if (heading.x == 0 && heading.y == -1) { //up
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < i * 2 + 1; j++) {
+                    try {
+                        let p = map[playerLocation.x + j - i][playerLocation.y - i - 1];
+                        p.classList.add("flashlight");
+                        flashlightPlaces.push(p);
+                    }
+                    catch {}
                 }
-                catch {}
             }
         }
+        else if (heading.x == 0 && heading.y == 1) { //down
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < i * 2 + 1; j++) {
+                    try {
+                        let p = map[playerLocation.x + j - i][playerLocation.y + i + 1];
+                        p.classList.add("flashlight");
+                        flashlightPlaces.push(p);
+                    }
+                    catch {}
+                }
+            }
+        }
+        else if (heading.x == 1 && heading.y == 0) { //right
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < i * 2 + 1; j++) {
+                    try {
+                        let p = map[playerLocation.x + i + 1][playerLocation.y + j - i];
+                        p.classList.add("flashlight");
+                        flashlightPlaces.push(p);
+                    }
+                    catch {}
+                }
+            }
+        }
+        else if (heading.x == -1 && heading.y == 0) { //left
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < i * 2 + 1; j++) {
+                    try {
+                        let p = map[playerLocation.x - i - 1][playerLocation.y + j - i];
+                        p.classList.add("flashlight");
+                        flashlightPlaces.push(p);
+                    }
+                    catch {}
+                }
+            }
+        }        
     }
 }
