@@ -5,6 +5,7 @@
 
 :root {
     --size: 15px;
+    --heading: 0deg;
     /* --col: 5; */
 }
 
@@ -26,9 +27,29 @@ body {
 .place {
     width: var(--size);
     height: var(--size);
-    /* border: 1px solid black; */
+    border: 1px solid black;
 }
 
 .player {
     background-color: salmon;
+    transform: rotate(var(--heading));
+}
+
+.player::before, .player::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    position: relative;
+}
+
+.player::before {
+    float: left;
+    translate: calc(var(--size) / 10) calc(var(--size) / 10);
+}
+
+.player::after {
+    float: right;
+    translate: calc(var(--size) / -10) calc(var(--size) / 10);
 }

@@ -47,6 +47,19 @@ function keyPress(e) {
     else if (e.key == 'a' && playerIdx % col != 0) {
         moveFromTo(playerIdx, playerIdx - 1);
     }
+
+    if (e.key == 'i') {
+        root.style.setProperty("--heading", "0deg");
+    }
+    else if (e.key == 'k') {
+        root.style.setProperty("--heading", "180deg");
+    }
+    else if (e.key == 'l') {
+        root.style.setProperty("--heading", "90deg");
+    }
+    else if (e.key == 'j') {
+        root.style.setProperty("--heading", "270deg");
+    }
 }
 
 function moveFromTo(from, to) {
