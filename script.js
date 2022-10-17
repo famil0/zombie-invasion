@@ -6,6 +6,10 @@ let playerLocation = {
     x: 0,
     y: 0
 };
+let heading = {
+    x: 0,
+    y: -1
+};
 let flashlightIsOn = false;
 let flashlightPlaces = [];
 
@@ -46,29 +50,37 @@ function newMap() {
 
 function keyPress(e) {
     if (e.key == 'w' && playerLocation.y > 0) {
-        moveTo(playerLocation.x, playerLocation.y - 1);
+        move(heading);
     }
     else if (e.key == 's' && playerLocation.y < row - 1) {
-        moveTo(playerLocation.x, playerLocation.y + 1);
+        move({ x: -heading.x, y: -heading.y});
     }
     else if (e.key == 'a' && playerLocation.x > 0) {
-        moveTo(playerLocation.x - 1, playerLocation.y);
+        move({ x: heading.y, y: -heading.x});
     }
     else if (e.key == 'd' && playerLocation.x < col - 1) {
-        moveTo(playerLocation.x + 1, playerLocation.y);
+        move({ x: -heading.y, y: heading.x});
     }
 
     if (e.key == 'i') {
         root.style.setProperty("--heading", "0deg");
+        heading.x = 0;
+        heading.y = -1;
     }
     else if (e.key == 'k') {
         root.style.setProperty("--heading", "180deg");
+        heading.x = 0;
+        heading.y = 1;
     }
     else if (e.key == 'l') {
         root.style.setProperty("--heading", "90deg");
+        heading.x = 1;
+        heading.y = 0;
     }
     else if (e.key == 'j') {
         root.style.setProperty("--heading", "270deg");
+        heading.x = -1;
+        heading.y = 0;
     }
 
     if (e.key == " ") {        
@@ -85,10 +97,11 @@ function removeFlashlights() {
     flashlightPlaces = [];
 }
 
-function moveTo(x, y) {
+function move(dir) {
     map[playerLocation.x][playerLocation.y].classList.toggle("player");
-    map[x][y].classList.toggle("player");
-    playerLocation = {x, y};
+    map[playerLocation.x + dir.x][playerLocation.y + dir.y].classList.toggle("player");
+    playerLocation.x = playerLocation.x + dir.x;
+    playerLocation.y = playerLocation.y + dir.y;
     removeFlashlights();
     flashlight();
 }
