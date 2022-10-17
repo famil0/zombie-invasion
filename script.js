@@ -35,17 +35,16 @@ function newMap() {
 }
 
 function keyPress(e) {
-
-    if (e.key == 'w') {
+    if (e.key == 'w' && playerIdx >= col) {
         moveFromTo(playerIdx, playerIdx - col);
     }
-    else if (e.key == 's') {
+    else if (e.key == 's' && playerIdx < col * row - col) {
         moveFromTo(playerIdx, playerIdx + col);
     }
-    else if (e.key == 'd') {
+    else if (e.key == 'd' && (playerIdx + 1) % col != 0) {
         moveFromTo(playerIdx, playerIdx + 1);
     }
-    else if (e.key == 'a') {
+    else if (e.key == 'a' && playerIdx % col != 0) {
         moveFromTo(playerIdx, playerIdx - 1);
     }
 }

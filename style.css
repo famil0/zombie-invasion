@@ -18,7 +18,7 @@ body {
 .map-container {
     width: fit-content;
     height: fit-content;
-    /* border: 1px solid black; */
+    border: 2px solid black;
     display: grid;
     grid-template-columns: repeat(var(--col), 1fr);
 }
@@ -26,7 +26,7 @@ body {
 .place {
     width: var(--size);
     height: var(--size);
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .player {
