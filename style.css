@@ -23,22 +23,26 @@ body {
     display: grid;
     grid-auto-flow: column;
     grid-template-rows: repeat(var(--row), 1fr);
+    background-color: gray;
 }
 
 .place {
     width: var(--size);
     height: var(--size);
-    background-color: gray;
     /* border: 1px solid black; */
 }
 
 .player {
     background-color: salmon;
     transform: rotate(var(--heading));
+    border-radius: 30%;
 }
 
 .player::before, .player::after {
-    content: "";
+    content: "●";
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
     width: calc(var(--size) / 3);
     height: calc(var(--size) / 3);
     background-color: white;
@@ -57,5 +61,9 @@ body {
 }
 
 .flashlight {
-    background-color: rgba(238, 255, 0, 0.15);
+    background-color: rgb(238, 255, 0);
+}
+
+.zombie.flashlight {
+    background-color: rgb(0, 221, 0);
 }
