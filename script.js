@@ -1,4 +1,4 @@
-let placeSize = 30;
+let placeSize = 40;
 let col = 20;
 let row = 20;
 let map = [];

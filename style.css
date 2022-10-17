@@ -4,7 +4,7 @@
 }
 
 :root {
-    --size: 15px;
+    --size: 0;
     --heading: 0deg;
     /* --col: 5; */
 }
@@ -37,8 +37,8 @@ body {
 
 .player::before, .player::after {
     content: "";
-    width: 8px;
-    height: 8px;
+    width: calc(var(--size) / 3);
+    height: calc(var(--size) / 3);
     background-color: white;
     border-radius: 50%;
     position: relative;
