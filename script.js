@@ -2,6 +2,12 @@ let placeSize = 40;
 let col = 20;
 let row = 20;
 let map = [];
+const directions = {
+    up: {x: 0, y: -1},
+    down: {x: 0, y: 1},
+    right: {x: 1, y: 0},
+    left: {x: -1, y: 0},
+}
 // let player = document.createElement("div");
 // let player = {
 //     x: 0,
@@ -54,44 +60,40 @@ function newMap() {
 
 function keyPress(e) {
     if (e.key == 'w' && player.y > 0) {
-        player.move(player.heading);
+        player.move(directions.up);
         flashlight();
     }
     else if (e.key == 's' && player.y < row - 1) {
-        player.move({x: -player.heading.x, y: -player.heading.y});
+        player.move(directions.down);
         flashlight();
     }
     else if (e.key == 'a' && player.x > 0) {
-        player.move({x: player.heading.y, y: -player.heading.x});
+        player.move(directions.left);
         flashlight();
     }
     else if (e.key == 'd' && player.x < col - 1) {
-        player.move({x: -player.heading.y, y: player.heading.x});
+        player.move(directions.right);
         flashlight();
     }
 
     if (e.key == 'i') {
         root.style.setProperty("--heading", "0deg");
-        player.heading.x = 0;
-        player.heading.y = -1;
+        player.heading = directions.up;
         flashlight(); 
     }
     else if (e.key == 'k') {
         root.style.setProperty("--heading", "180deg");
-        player.heading.x = 0;
-        player.heading.y = 1;
+        player.heading = directions.down
         flashlight(); 
     }
     else if (e.key == 'l') {
         root.style.setProperty("--heading", "90deg");
-        player.heading.x = 1;
-        player.heading.y = 0;
+        player.heading = directions.right;
         flashlight(); 
     }
     else if (e.key == 'j') {
         root.style.setProperty("--heading", "270deg");
-        player.heading.x = -1;
-        player.heading.y = 0;
+        player.heading = directions.left;
         flashlight(); 
     }
 
