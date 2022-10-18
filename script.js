@@ -23,6 +23,7 @@ let root = document.querySelector(":root");
 document.body.addEventListener("keypress", keyPress);
 
 let player = new Entity({x: 10, y: 10}, directions.up, entityType.player);
+let zombie = new Entity({x: Math.floor(col * Math.random()), y: Math.floor(row * Math.random())}, directions.up, entityType.zombie);
 
 main();
 
@@ -34,6 +35,7 @@ function main() {
     
     newMap();
     player.show();
+    zombie.show();
 }
 
 function newMap() {
@@ -101,53 +103,31 @@ function flashlight() {
     removeFlashlights();
     let n = 10;
     if (flashlightIsOn) {
-        if (player.heading.x == 0 && player.heading.y == -1) { //up
-            for (let i = 0; i < n; i++) {
-                for (let j = 0; j < i * 2 + 1; j++) {
-                    try {
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < i * 2 + 1; j++) {
+                try {
+                    if (player.heading == directions.up) {
                         let p = map[player.x + j - i][player.y - i - 1];
                         p.classList.add("flashlight");
                         flashlightPlaces.push(p);
                     }
-                    catch {}
-                }
-            }
-        }
-        else if (player.heading.x == 0 && player.heading.y == 1) { //down
-            for (let i = 0; i < n; i++) {
-                for (let j = 0; j < i * 2 + 1; j++) {
-                    try {
+                    else if (player.heading == directions.down) {
                         let p = map[player.x + j - i][player.y + i + 1];
                         p.classList.add("flashlight");
                         flashlightPlaces.push(p);
                     }
-                    catch {}
-                }
-            }
-        }
-        else if (player.heading.x == 1 && player.heading.y == 0) { //right
-            for (let i = 0; i < n; i++) {
-                for (let j = 0; j < i * 2 + 1; j++) {
-                    try {
+                    else if (player.heading == directions.right) {
                         let p = map[player.x + i + 1][player.y + j - i];
                         p.classList.add("flashlight");
                         flashlightPlaces.push(p);
                     }
-                    catch {}
-                }
-            }
-        }
-        else if (player.heading.x == -1 && player.heading.y == 0) { //left
-            for (let i = 0; i < n; i++) {
-                for (let j = 0; j < i * 2 + 1; j++) {
-                    try {
+                    else if (player.heading == directions.left) {
                         let p = map[player.x - i - 1][player.y + j - i];
                         p.classList.add("flashlight");
                         flashlightPlaces.push(p);
                     }
-                    catch {}
-                }
+                } catch{}
             }
-        }        
+        }       
     }
 }
