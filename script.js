@@ -13,26 +13,16 @@ const entityType = {
     player: "player",
     zombie: "zombie"
 }
-// let player = document.createElement("div");
-// let player = {
-//     x: 0,
-//     y: 0
-// };
-// let heading = {
-//     x: 0,
-//     y: -1
-// };
 let flashlightIsOn = false;
 let flashlightPlaces = [];
 
 /**@type{HTMLDivElement}*/
 let mapContainer = document.querySelector(".map-container");
-/**@type{HTMLDivElement}*/
 let root = document.querySelector(":root");
 
 document.body.addEventListener("keypress", keyPress);
 
-let player = new Entity({x: 10, y: 10}, {x: 0, y: -1}, entityType.player);
+let player = new Entity({x: 10, y: 10}, directions.up, entityType.player);
 
 main();
 
@@ -40,7 +30,7 @@ main();
 function main() {
     mapContainer.style.setProperty("--row", row);
     root.style.setProperty("--size", placeSize + "px");
-
+    
     
     newMap();
     player.show();
@@ -57,10 +47,6 @@ function newMap() {
         }
         map.push(arr);
     }
-    // let x = Math.floor(col*Math.random());
-    // let y = Math.floor(row*Math.random());
-    // map[x][y].classList.add("player");
-    // player = {x, y};
 }
 
 function keyPress(e) {
@@ -82,23 +68,19 @@ function keyPress(e) {
     }
 
     if (e.key == 'i') {
-        root.style.setProperty("--heading", "0deg");
-        player.heading = directions.up;
+        player.rotate(directions.up);
         flashlight(); 
     }
     else if (e.key == 'k') {
-        root.style.setProperty("--heading", "180deg");
-        player.heading = directions.down
+        player.rotate(directions.down);
         flashlight(); 
     }
     else if (e.key == 'l') {
-        root.style.setProperty("--heading", "90deg");
-        player.heading = directions.right;
+        player.rotate(directions.right);
         flashlight(); 
     }
     else if (e.key == 'j') {
-        root.style.setProperty("--heading", "270deg");
-        player.heading = directions.left;
+        player.rotate(directions.left);
         flashlight(); 
     }
 
