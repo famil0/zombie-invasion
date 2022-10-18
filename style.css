@@ -101,3 +101,13 @@ body {
 #right { transform: rotate(90deg); }
 #down { transform: rotate(180deg); }
 #left { transform: rotate(270deg); }
+
+.hit {
+    animation: hit 0.3s;
+}
+
+@keyframes hit {
+    from {
+        background-color: red;
+    }
+}
