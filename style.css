@@ -50,7 +50,24 @@ body {
     position: relative;
 }
 
+.zombie::before, .zombie::after {
+    content: "●";
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: calc(var(--size) / 3);
+    height: calc(var(--size) / 3);
+    background-color: white;
+    border-radius: 50%;
+    position: relative;
+}
+
 .player::before {
+    float: left;
+    translate: calc(var(--size) / 10) calc(var(--size) / 10);
+}
+
+.zombie::before {
     float: left;
     translate: calc(var(--size) / 10) calc(var(--size) / 10);
 }
@@ -60,11 +77,23 @@ body {
     translate: calc(var(--size) / -10) calc(var(--size) / 10);
 }
 
+.zombie::after {
+    float: right;
+    translate: calc(var(--size) / -10) calc(var(--size) / 10);
+}
+
+.zombie {
+    /* display: none; */
+    /* opacity: 1; */
+    filter: opacity(0);
+}
+
 .flashlight {
     background-color: rgb(255, 255, 255);
 }
 
 .zombie.flashlight {
+    filter: opacity(1);
+    /* display: flex; */
     background-color: rgb(0, 221, 0);
-    border-radius: 50%;
 }
