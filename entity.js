@@ -39,6 +39,7 @@ class Entity {
     }
 
     hit(amount, target) {
+        if (target == null) return;
         target.health -= amount;
         target.div.classList.add("hit");
     }

@@ -24,6 +24,7 @@ document.body.addEventListener("keypress", keyPress);
 
 let player = new Entity({x: 10, y: 10}, directions.up, entityType.player);
 let zombie = new Entity({x: Math.floor(col * Math.random()), y: Math.floor(row * Math.random())}, directions.up, entityType.zombie);
+let zombies = [zombie];
 
 main();
 
@@ -86,9 +87,14 @@ function keyPress(e) {
         flashlight(); 
     }
 
-    if (e.key == " ") {        
+    if (e.key == "f") {        
         flashlightIsOn = !flashlightIsOn;
         flashlight();        
+    }
+
+    if (e.key == " ") {
+        player.hit(10, zombies.find(z => z.div == map[player.x + player.heading.x][player.y + player.heading.y].children[0]
+        ));
     }
 }
 
