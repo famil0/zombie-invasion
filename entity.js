@@ -42,5 +42,16 @@ class Entity {
         if (target == null) return;
         target.health -= amount;
         target.div.classList.add("hit");
+        if (target.health <= 0) target.die();
+    }
+
+    die() {
+        this.div.remove();
+        this.div = null;
+        if (this.type == entityType.zombie) {
+            zombies.splice(this, 1);
+            // zombies.remove(z => z.div == null);
+            
+        }
     }
 }
