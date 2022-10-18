@@ -8,6 +8,11 @@ const directions = {
     right: {x: 1, y: 0},
     left: {x: -1, y: 0},
 }
+
+const entityType = {
+    player: "player",
+    zombie: "zombie"
+}
 // let player = document.createElement("div");
 // let player = {
 //     x: 0,
@@ -27,7 +32,7 @@ let root = document.querySelector(":root");
 
 document.body.addEventListener("keypress", keyPress);
 
-let player = new Player(10, 10, {x: 0, y: -1});
+let player = new Entity({x: 10, y: 10}, {x: 0, y: -1}, entityType.player);
 
 main();
 
