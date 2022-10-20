@@ -20,10 +20,10 @@ let flashlightPlaces = [];
 let mapContainer = document.querySelector(".map-container");
 let root = document.querySelector(":root");
 
-document.body.addEventListener("keypress", keyPress);
+document.body.addEventListener("keydown", keyPress);
 
-let player = new Entity({x: 10, y: 10}, directions.up, entityType.player);
-let zombie = new Entity({x: Math.floor(col * Math.random()), y: Math.floor(row * Math.random())}, directions.up, entityType.zombie);
+let player = new Player({x: 10, y: 10}, directions.up, entityType.player);
+let zombie = new Zombie({x: Math.floor(col * Math.random()), y: Math.floor(row * Math.random())}, directions.up, entityType.zombie);
 let zombies = [zombie];
 
 main();
@@ -93,8 +93,7 @@ function keyPress(e) {
     }
 
     if (e.key == " ") {
-        player.hit(10, zombies.find(z => z.div == map[player.x + player.heading.x][player.y + player.heading.y].children[0]
-        ));
+        player.hit(10, zombies.find(z => z.div == map[player.x + player.heading.x][player.y + player.heading.y].children[0]));
     }
 }
 

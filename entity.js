@@ -5,8 +5,14 @@ class Entity {
         this.heading = heading;
         this.type = type;
         this.div = document.createElement("div");
-        this.div.addEventListener("webkitAnimationEnd", () => { this.div.classList.remove("hit"); })
         this.health = 100;
+        this.canGetHit = true;
+        this.n = 0;
+        this.div.addEventListener("webkitAnimationEnd", () => { 
+            this.canGetHit = true;
+            this.div.classList.remove("hit");
+            console.log("utana: " + this.canGetHit);
+        });
     }
 
     show() {
@@ -39,19 +45,16 @@ class Entity {
     }
 
     hit(amount, target) {
-        if (target == null) return;
+        if (target == null || target.canGetHit == false || target.div.classList.contains("hit")) return;
         target.health -= amount;
+        // if ()
         target.div.classList.add("hit");
+        this.canGetHit = false; 
         if (target.health <= 0) target.die();
     }
 
     die() {
         this.div.remove();
-        this.div = null;
-        if (this.type == entityType.zombie) {
-            zombies.splice(this, 1);
-            // zombies.remove(z => z.div == null);
-            
-        }
+        this.div = null;        
     }
 }
